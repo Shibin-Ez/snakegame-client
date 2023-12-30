@@ -5,13 +5,14 @@ import { Input } from "@mui/material";
 import { setKey } from "./logic/game";
 import { setHighScore, setUserId, setName } from "./state";
 import { useDispatch, useSelector } from "react-redux";
+import { ColorRing } from "react-loader-spinner";
 
 function App() {
   const [score, setScore] = useState(0);
   // const [highScore, setHighScore] = useState(0);
   const [gameoverState, setGameoverState] = useState(false);
   const [time, setTime] = useState(0);
-  const [isSubmit, setIsSubmit] = useState(false);
+  const [isSubmit, setIsSubmit] = useState("false");
   const [rank, setRank] = useState(0);
   const highScore = useSelector((state) => state.highScore);
   const userId = useSelector((state) => state.userId);
@@ -42,6 +43,7 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmit("loading");
     const name = e.target[0].value;
     const data = {
       name,
@@ -50,19 +52,22 @@ function App() {
     };
 
     if (userId == 0) {
-      const formResponse = await fetch(`${process.env.REACT_APP_SERVER_URL}/records`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const formResponse = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/records`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
 
       const response = await formResponse.json();
       console.log(response);
       dispatch(setUserId({ userId: response.userId }));
       dispatch(setName({ name: response.name }));
-      setIsSubmit(true);
+      setIsSubmit("true");
       setRank(response.rank);
     } else {
       const formResponse = await fetch(
@@ -78,7 +83,7 @@ function App() {
 
       const response = await formResponse.json();
       console.log(response);
-      setIsSubmit(true);
+      setIsSubmit("true");
       setRank(response.rank);
     }
   };
@@ -169,15 +174,35 @@ function App() {
               className="name-input"
               style={{ color: "white" }}
               defaultValue={name}
+              required
             />
             {/* <button type="button" className="name-reset-btn" onClick={resetName}>Hi</button> */}
-            {isSubmit ? (
+            {isSubmit === "true" ? (
               <div className="submit-after">
                 World Rank: <span className="score-data">{rank}</span>
               </div>
             ) : (
               <button type="submit" className="submit-btn" id="bottom">
                 Submit
+                  <ColorRing
+                    visible={isSubmit === "loading" ? true : false}
+                    height="40"
+                    width="40"
+                    ariaLabel="color-ring-loading"
+                    wrapperStyle={{
+                      position: "absolute",
+                      top: "0",
+                      right: "0.6rem",
+                    }}
+                    wrapperClass="color-ring-wrapper"
+                    colors={[
+                      "#e15b64",
+                      "#f47e60",
+                      "#f8b26a",
+                      "#abbd81",
+                      "#849b87",
+                    ]}
+                  />
               </button>
             )}
           </form>
