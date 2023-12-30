@@ -1,38 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;700&display=swap');
+
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  margin-top: 3rem;
+  font-family: 'Teko', sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: black; 
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.main-left-bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.btn {
+  all: unset;
+  padding: 0.5rem 1rem;
+  background-color: rgb(65, 59, 230);
+  color: white;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+
+.joystick {
+  display: none;
+  position: relative;
+}
+
+.joy-btn {
+  all: unset;
+  position: absolute;
+  border: 1px solid white;
+  border-radius: 0.5rem;
+  background: url('../public/joystick_btn.png');
+  background-color: white;
+  background-size: cover;
+  width: 2.2rem;
+  aspect-ratio: 1/1;
+}
+
+.joy-up {
+  rotate: -90deg;
+}
+
+.joy-left {
+  right: 1.2rem;
+  top: 2rem;
+  rotate: 180deg;
+}
+
+.joy-right {
+  left: 1.2rem;
+  top: 2rem;
+}
+
+.joy-down {
+  top: 4rem;
+  rotate: 90deg;
+}
+
+.main-right {
+  margin-left: 2rem;
+}
+
+.main-right-top {
+  border: 1px solid white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  position: relative;
+  width: min(10rem, 100%);
+  margin-bottom: 1rem;
+}
+
+.score {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(137, 45, 8);
+  border-top-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.score-text {
+  margin-top: 1rem;
+  font-weight: 700;
+  font-size: 3rem;
+  color: yellow
+}
+
+.high-score-text {
+  font-size: 1.1rem;
+  opacity: 0.5;
+  margin-top: 0.5rem;
+}
+
+.time {
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: left;
+}
+
+.main-right-bottom {
+  text-align: left;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+ul {
+  padding: 0;
+  margin-bottom: 5rem;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 0.5rem;
+}
+
+.score-data {
+  color: yellow;
+}
+
+.name-input {
+  border-bottom: 1px solid #555; /* Border color */
+  /* border-radius: 4px; Rounded corners */
+  /* padding: 8px 12px; Adjust padding as needed */
+  font-size: 16px; /* Font size */
+}
+
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.submit-btn:hover {
+  border-color: #fff;
+  background-color: #fff;
+}
+
+.submit-btn:focus {
+  outline: none;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.submit-after {
+  font-size: 1.8rem;
+  margin-top: 1rem;
+}
+
+
+@media screen and (max-width: 880px) {
+  .App {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .main-left {
+    width: fit-content;
+  }
+
+  .main-left-bottom {
+    width: 100%;
+  }
+
+  .btn {
+    margin-top: 1.6rem;
+    width: 3.5rem;
+  }
+
+  .joystick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-right {
+    margin-left: 0;
+    margin-top: 2rem;
+  }
+
+  .right-and-time {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+  }
+
+  .main-right-top {
+    width: min(50%, 19rem);
+    margin-bottom: 0;
+  }
+
+  .time {
+    font-size: 2rem;
+    border: 1px solid white;
+    width: 35%;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .main-right-bottom {
+    /* opacity: 1; */
+    text-align: center;
+  }
+
+  .name-input {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .submit-btn {
+    margin-bottom: 1rem;
   }
 }
