@@ -126,6 +126,12 @@ const Board = ({ setScore, setGameoverState, setTime }) => {
     const handleKeyDown = (e) => {
       if (start === false && e.key === "ArrowLeft") return;
 
+      const lastKey = getKey();
+      if (e.key === "ArrowLeft" && lastKey === "ArrowRight") return;
+      if (e.key === "ArrowRight" && lastKey === "ArrowLeft") return;
+      if (e.key === "ArrowUp" && lastKey === "ArrowDown") return;
+      if (e.key === "ArrowDown" && lastKey === "ArrowUp") return; 
+
       const allowedKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
       if (allowedKeys.includes(e.key)) {
         start = true;

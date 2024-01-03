@@ -33,6 +33,10 @@ body {
   border-radius: 0.5rem;
 }
 
+.btn:hover {
+  background-color: rgb(65, 59, 230, 0.8);
+}
+
 .joystick {
   display: none;
   position: relative;
@@ -235,5 +239,16 @@ li {
 
   .submit-btn {
     margin-bottom: 1rem;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .btn {
+    width: unset;
+  }
+  
+  .btn-text {
+    display: none;
   }
 }

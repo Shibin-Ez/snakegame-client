@@ -34,3 +34,54 @@
     background-image: url("../../public/snake_head.png");
     background-size: cover;
 }
+
+
+/* Modal */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 100;
+    /* background  blur*/
+    backdrop-filter: blur(4px);
+    overflow-y:scroll;
+}
+
+.modal-main {
+    margin-top: 2.5rem;
+}
+
+.modal-main h1 {
+    color: yellow;
+}
+
+.modal-table th {
+    color: yellow;
+}
+
+.modal-table td {
+    padding: 0.3rem 2rem;
+}
+
+.modal-close-btn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    border-radius: 0.3rem;
+    font-size: 1.7rem;
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1/1;
+}
+
+.modal-close-btn:hover {
+    background-color: rgb(255, 255, 255, 0.2);
+    color: white;
+}

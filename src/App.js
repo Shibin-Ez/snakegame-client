@@ -6,6 +6,9 @@ import { setKey } from "./logic/game";
 import { setHighScore, setUserId, setName } from "./state";
 import { useDispatch, useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
+import Modal from "./components/Modal";
+import { VscDebugRestart } from "react-icons/vsc";
+import { MdLeaderboard } from "react-icons/md";
 
 function App() {
   const [score, setScore] = useState(0);
@@ -14,6 +17,7 @@ function App() {
   const [time, setTime] = useState(0);
   const [isSubmit, setIsSubmit] = useState("false");
   const [rank, setRank] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const highScore = useSelector((state) => state.highScore);
   const userId = useSelector((state) => state.userId);
   const name = useSelector((state) => state.name);
@@ -121,7 +125,10 @@ function App() {
           setTime={setTime}
         />
         <div className="main-left-bottom">
-          <button className="btn play-btn">PLAY</button>
+          <button className="btn play-btn" onClick={() => setIsModalOpen(true)}>
+            <MdLeaderboard style={{ position: "relative", top: "0.2rem" }} />
+            <span className="btn-text">{" "}RECORDS</span>
+          </button>
           <div className="joystick">
             <button className="joy-btn joy-up" onClick={doJoystick}></button>
             <button className="joy-btn joy-down" onClick={doJoystick}></button>
@@ -129,7 +136,8 @@ function App() {
             <button className="joy-btn joy-right" onClick={doJoystick}></button>
           </div>
           <button className="btn restart-btn" onClick={restart}>
-            RESTART
+          <span className="btn-text">RESTART{" "}</span>
+            <VscDebugRestart style={{ position: "relative", top: "0.2rem" }} />
           </button>
         </div>
       </div>
@@ -184,30 +192,31 @@ function App() {
             ) : (
               <button type="submit" className="submit-btn" id="bottom">
                 Submit
-                  <ColorRing
-                    visible={isSubmit === "loading" ? true : false}
-                    height="40"
-                    width="40"
-                    ariaLabel="color-ring-loading"
-                    wrapperStyle={{
-                      position: "absolute",
-                      top: "0",
-                      right: "0.6rem",
-                    }}
-                    wrapperClass="color-ring-wrapper"
-                    colors={[
-                      "#e15b64",
-                      "#f47e60",
-                      "#f8b26a",
-                      "#abbd81",
-                      "#849b87",
-                    ]}
-                  />
+                <ColorRing
+                  visible={isSubmit === "loading" ? true : false}
+                  height="40"
+                  width="40"
+                  ariaLabel="color-ring-loading"
+                  wrapperStyle={{
+                    position: "absolute",
+                    top: "0",
+                    right: "0.6rem",
+                  }}
+                  wrapperClass="color-ring-wrapper"
+                  colors={[
+                    "#e15b64",
+                    "#f47e60",
+                    "#f8b26a",
+                    "#abbd81",
+                    "#849b87",
+                  ]}
+                />
               </button>
             )}
           </form>
         </div>
       </div>
+      {isModalOpen && <Modal setIsModalOpen={setIsModalOpen} />}
     </div>
   );
 }
