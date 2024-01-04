@@ -53,15 +53,9 @@ const Board = ({ setScore, setGameoverState, setTime }) => {
   };
 
   const gameOver = () => {
-    // window.location.reload();
     gameover = true;
     setGameoverState(true);
   };
-
-  //   const restart = () => {
-  //     // window.location.reload();
-  //     initiate();
-  //   };
 
   let count = 0;
   const update = () => {
