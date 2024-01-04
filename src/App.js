@@ -7,7 +7,7 @@ import { setHighScore, setUserId, setName } from "./state";
 import { useDispatch, useSelector } from "react-redux";
 import { ColorRing } from "react-loader-spinner";
 import Modal from "./components/Modal";
-import { MdRestartAlt } from "react-icons/md";
+import { VscDebugRestart } from "react-icons/vsc";
 import { MdLeaderboard } from "react-icons/md";
 
 function App() {
@@ -137,7 +137,7 @@ function App() {
           </div>
           <button className="btn restart-btn" onClick={restart}>
           <span className="btn-text">RESTART{" "}</span>
-            <MdRestartAlt style={{ position: "relative", top: "0.2rem" }} />
+            <VscDebugRestart style={{ position: "relative", top: "0.2rem" }} />
           </button>
         </div>
       </div>
