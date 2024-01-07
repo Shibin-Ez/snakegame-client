@@ -22,6 +22,8 @@ function App() {
   const userId = useSelector((state) => state.userId);
   const name = useSelector((state) => state.name);
   const dispatch = useDispatch();
+  let prevKey = "";
+  const [breakHighScore, setBreakHighScore] = useState(false);
 
   const restart = () => {
     window.location.reload();
@@ -31,16 +33,16 @@ function App() {
     const temp = e.target.className[12];
     switch (temp) {
       case "u":
-        setKey("ArrowUp");
+        if (prevKey !== "ArrowDown") setKey("ArrowUp");
         break;
       case "d":
-        setKey("ArrowDown");
+        if (prevKey !== "ArrowUp") setKey("ArrowDown");
         break;
       case "l":
-        setKey("ArrowLeft");
+        if (prevKey !== "ArrowRight") setKey("ArrowLeft");
         break;
       case "r":
-        setKey("ArrowRight");
+        if (prevKey !== "ArrowLeft") setKey("ArrowRight");
         break;
     }
   };
@@ -107,6 +109,12 @@ function App() {
   useEffect(() => {
     if (score > highScore) {
       dispatch(setHighScore({ highScore: score }));
+      console.log(breakHighScore);
+      if (!breakHighScore) {
+        const audio = new Audio("break-highscore-sound.wav");
+        audio.play();
+        setBreakHighScore(true);
+      }
     }
   }, [score]);
 
@@ -123,6 +131,7 @@ function App() {
           setScore={setScore}
           setGameoverState={setGameoverState}
           setTime={setTime}
+          prevKey={prevKey}
         />
         <div className="main-left-bottom">
           <button className="btn play-btn" onClick={() => setIsModalOpen(true)}>

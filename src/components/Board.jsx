@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./styles.css";
 import { getKey, setKey } from "../logic/game";
 
-const Board = ({ setScore, setGameoverState, setTime }) => {
+const Board = ({ setScore, setGameoverState, setTime, prevKey }) => {
   const rows = 18;
   const cols = 18;
 
@@ -55,6 +55,8 @@ const Board = ({ setScore, setGameoverState, setTime }) => {
   const gameOver = () => {
     gameover = true;
     setGameoverState(true);
+    const audio = new Audio("gameover-sound.mp3");
+    audio.play();
   };
 
   let count = 0;
@@ -97,6 +99,9 @@ const Board = ({ setScore, setGameoverState, setTime }) => {
       snake.push([tail[0], tail[1]]);
       generateFood();
       setScore((prevScore) => prevScore + 1);
+      // eating sound
+      const audio = new Audio("eating-sound.mp3");
+      audio.play();
     } else if (newGrid[snake[0][0]][snake[0][1]] === 1) {
       // snake eats itself
       gameOver();
@@ -108,7 +113,6 @@ const Board = ({ setScore, setGameoverState, setTime }) => {
   };
 
   // let key = "";
-  let prevKey = "";
 
   useEffect(() => {
     initiate();
