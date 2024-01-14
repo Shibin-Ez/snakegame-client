@@ -126,7 +126,7 @@ function App() {
 
   useEffect(() => {
     const invokeServer = async () => {
-      const formResponse = fetch(`${process.env.REACT_APP_SERVER_URL}/records`);
+      const response = fetch(`${process.env.REACT_APP_SERVER_URL}/records`);
       const data = await response.json();
     }
     invokeServer();
