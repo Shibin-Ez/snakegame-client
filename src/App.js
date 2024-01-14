@@ -124,6 +124,14 @@ function App() {
     }
   }, [gameoverState]);
 
+  useEffect(() => {
+    const invokeServer = async () => {
+      const formResponse = fetch(`${process.env.REACT_APP_SERVER_URL}/records`);
+      const data = await response.json();
+    }
+    invokeServer();
+  }, []);
+
   return (
     <div className="App">
       <div className="main-left">
